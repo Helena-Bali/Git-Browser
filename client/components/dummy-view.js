@@ -1,15 +1,21 @@
-import React from 'react'
-
+import React from "react";
+import { Route, Switch } from 'react-router-dom'
 import Head from './head'
+import MainPage from './main-page'
+import RepositoryList from './repository-list'
+import RepositoryName from './reposytory-name'
+
 
 const Dummy = () => {
-  return (
+   return (
     <div>
       <Head title="Hello" />
-      <div className="flex items-center justify-center h-screen">
-        <div className="bg-indigo-800 text-white font-bold rounded-lg border shadow-lg p-10">
-          This is dummy component
-        </div>
+      <div>
+        <Switch>
+          <Route exact path="/" component={() => <MainPage />} />
+          <Route exact path="/:userName" component={() => <RepositoryList />} />
+          <Route exact path="/:userName/:repositoryName" component={() => <RepositoryName />} />
+        </Switch>
       </div>
     </div>
   )

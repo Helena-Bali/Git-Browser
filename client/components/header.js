@@ -1,48 +1,21 @@
-import React, { useState } from 'react'
+import React from "react";
+import { Link, useParams } from "react-router-dom";
 
 const Header = () => {
-  const [toggled, toggle] = useState(false)
+  const { userName, repositoryName } = useParams();
 
-  return (
-    <nav className="flex items-center justify-between flex-wrap bg-gray-400 p-6">
-      <div className="flex items-center flex-shrink-0 text-white mr-6">
-        <svg
-          className="fill-current h-8 w-8 mr-2"
-          width="54"
-          height="54"
-          viewBox="0 0 54 54"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
-        </svg>
-        <button
-          type="button"
-          id="toggle-button"
-          className="font-semibold text-xl tracking-tight"
-          onClick={() => toggle(!toggled)}
-        >
-          Tailwind CSS
-        </button>
+  return (<div className="bg-indigo-800 font-bold justify-between rounded-lg border shadow-lg p-10">
+      <div>
+        <Link to="/" id="go-back" className="bg-gray-300 text-black items-center text-center h-8 w-24  font-bold rounded-lg border shadow-lg p-0">
+          Go back
+        </Link>
       </div>
-      {toggled && (
-        <div id="menu" className="block">
-          <button
-            type="button"
-            className="flex items-center px-3 py-2 border rounded text-gray-700 border-gray-700 hover:text-white hover:border-white"
-          >
-            <svg
-              className="fill-current h-3 w-3"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Menu</title>
-              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-            </svg>
-          </button>
-        </div>
-      )}
-    </nav>
-  )
-}
+      { repositoryName && <Link to={`/${userName}`} id="go-repository-list" className="bg-gray-300 text-black items-center text-center h-8 w-24  font-bold rounded-lg border shadow-lg p-0">
+          Go to repository list
+        </Link> }
+      <div id="repository-name" className="bg-indigo-800 text-white font-bold border-none">{userName} repositories:</div>
+    </div>
+  );
+};
 
-export default React.memo(Header)
+export default React.memo(Header);
